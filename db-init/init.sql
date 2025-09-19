@@ -17,3 +17,7 @@ CREATE TABLE IF NOT EXISTS products (
     brand VARCHAR(20) NOT NULL,
     price DECIMAL(10, 2) NOT NULL
 );
+INSERT INTO users (name, email) VALUES
+('Ada Lovelaces house', 'house',200),
+('Adelehouse', 'house',200),
+('dr houses house', 'house',200);

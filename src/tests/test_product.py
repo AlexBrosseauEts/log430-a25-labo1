@@ -8,7 +8,7 @@ def test_product_select():
     assert len(product_list) >= 3
 
 def test_product_insert():
-    product = User(None, 'Margaret Hamiltons house', 'house',200)
+    product = Product(None, 'Margaret Hamiltons house', 'house',200)
     dao.insert(product)
     product_list = dao.select_all()
     names = [u.name for u in product_list]
@@ -20,7 +20,7 @@ def test_product_update():
 
     corrected_name = 'Bobs houses'
     product.id = assigned_id
-    product.email = corrected_email
+    product.email = corrected_name
 
     dao.update(product)
 
