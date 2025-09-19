@@ -20,7 +20,7 @@ def test_product_update():
 
     corrected_name = 'Bobs houses'
     product.id = assigned_id
-    product.email = corrected_name
+    product.name = corrected_name
 
     dao.update(product)
 
