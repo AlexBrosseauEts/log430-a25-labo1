@@ -21,6 +21,7 @@ services:
       MYSQL_DATABASE: mydb
       MYSQL_USER: user
       MYSQL_PASSWORD: pass
+    command: --default-authentication-plugin=mysql_native_password --ssl=0
     volumes:
       - ./db-init:/docker-entrypoint-initdb.d
 
