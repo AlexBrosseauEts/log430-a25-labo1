@@ -11,9 +11,12 @@ from models.product import Product
 class ProductDAO:
     def __init__(self):
         try:
-            env_path = "../.env"
-            print(os.path.abspath(env_path))
-            load_dotenv(dotenv_path=env_path)
+            #Un debug pour trouver erreur de .env
+            env_path = find_dotenv(usecwd=True)
+            load_dotenv(env_path, override=True)
+            print("ENV loaded from:", env_path)
+            print("MYSQL_HOST =", os.getenv("MYSQL_HOST"))
+            
             db_host = os.getenv("MYSQL_HOST")
             db_name = os.getenv("MYSQL_DB_NAME")
             db_user = os.getenv("DB_USERNAME")
