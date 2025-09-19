@@ -5,11 +5,13 @@ services:
     volumes:
       - .:/app
     depends_on:
-      - mysql
-      - mongo
+      mysql:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
     networks: [appnet]
     stdin_open: true
-    tty: true  
+    tty: true
 
   mysql:
     image: mysql:8.4
@@ -24,10 +26,15 @@ services:
       MYSQL_PASSWORD: pass
     volumes:
       - ./db-init:/docker-entrypoint-initdb.d
-      
+    networks: [appnet]
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uuser", "-ppass"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
   mongo:
     image: mongo:6
-    networks: [appnet]
     container_name: mongo
     restart: unless-stopped
     ports:
@@ -37,8 +44,16 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: pass
     volumes:
       - mongo-data:/data/db
+    networks: [appnet]
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --quiet -u user -p pass --eval \"db.adminCommand('ping')\" || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
 networks:
   appnet:
     driver: bridge
+
 volumes:
   mongo-data:
