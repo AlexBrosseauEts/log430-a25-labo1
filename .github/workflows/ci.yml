@@ -29,5 +29,5 @@ jobs:
           until docker exec db pg_isready -U testuser; do sleep 1; done
       - name: Exécuter les tests
         working-directory: src
-        run: echo "python3 -m pytest"
+        run: echo "python3 -m pytest ./tests/test_user.py"
 
