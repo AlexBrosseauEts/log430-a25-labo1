@@ -19,7 +19,7 @@ class UserDAOMongo:
     ##-------------Traduction Mongo <-> MySql -------------##
     def _doc_to_user(self, doc):
         #transformer doc mongo en User object
-        return User(id=str(doc["_id"]), name=doc.get("name"), email=doc.get("email"))
+        return User(str(doc["_id"]), doc.get("name"), doc.get("email"))
 
     def _user_to_doc(self, user: User):
         # le contraire de l'autre
