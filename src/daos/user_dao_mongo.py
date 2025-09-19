@@ -42,5 +42,5 @@ class UserDAOMongo:
             {"$set": self._user_to_doc(user)}
         )
 
-    def delete(self, user_id):
+    def delete(self, user_id: str) -> None:
         self.col.delete_one({"_id": ObjectId(user_id)})
