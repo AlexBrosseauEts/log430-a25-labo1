@@ -33,7 +33,7 @@ class ProductDAO:
 
     def insert(self, product):
         """ Insert given product into MySQL """
-         self.cursor.execute(
+        self.cursor.execute(
             "INSERT INTO products (name, brand, price) VALUES (%s, %s, %s)",
             (product.name, product.brand, product.price)
         )
