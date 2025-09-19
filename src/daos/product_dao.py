@@ -12,16 +12,14 @@ class ProductDAO:
     def __init__(self):
         try:
             #Un debug pour trouver erreur de .env
-            env_path = find_dotenv(usecwd=True)
+            env_path = "/app/.env"
             load_dotenv(env_path, override=True)
-            print("ENV loaded from:", env_path)
-            print("MYSQL_HOST =", os.getenv("MYSQL_HOST"))
 
             db_host = os.getenv("MYSQL_HOST")
             db_name = os.getenv("MYSQL_DB_NAME")
             db_user = os.getenv("DB_USERNAME")
             db_pass = os.getenv("DB_PASSWORD")     
-            self.conn = mysql.connector.connect(host=db_host, user=db_user, password=db_pass, database=db_name)   
+            self.conn = mysql.connector.connect(host=db_host, user=db_user, password=db_pass, database=db_name,port=3306,ssl_disabled=True)   
             self.cursor = self.conn.cursor()
         except FileNotFoundError as e:
             print("Attention : Veuillez créer un fichier .env")
