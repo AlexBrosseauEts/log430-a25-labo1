@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 import os
 from models.user import User
+from dotenv import load_dotenv
 class UserDAOMongo:
     def __init__(self):
         env_path = "../.env"
