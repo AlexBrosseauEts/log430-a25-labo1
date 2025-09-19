@@ -4,7 +4,7 @@ SPDX - License - Identifier: LGPL - 3.0 - or -later
 Auteurs : Gabriel C. Ullmann, Fabio Petrillo, 2025
 """
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 import mysql.connector
 from models.user import User
 from models.product import Product
@@ -16,7 +16,7 @@ class ProductDAO:
             load_dotenv(env_path, override=True)
             print("ENV loaded from:", env_path)
             print("MYSQL_HOST =", os.getenv("MYSQL_HOST"))
-            
+
             db_host = os.getenv("MYSQL_HOST")
             db_name = os.getenv("MYSQL_DB_NAME")
             db_user = os.getenv("DB_USERNAME")
